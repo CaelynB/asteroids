@@ -46,6 +46,7 @@ def main():
 
     # main game loop
     while True:
+        # for each event in the event queue
         for event in pygame.event.get():
             # if the user clicks the close button, exit the game
             if event.type == pygame.QUIT:
@@ -57,8 +58,9 @@ def main():
         # fill the screen with black color
         screen.fill("black")
 
-        # render the drawable objects on the screen each frame
+        # for each object in the drawable group, call its draw method
         for object in drawable:
+            # render the drawable objects on the screen each frame
             object.draw(screen)
 
         # for each asteroid in the asteroids group, check for collisions with the player
@@ -67,6 +69,13 @@ def main():
             if asteroid.collide(player):
                 print("Game Over!")
                 sys.exit()
+
+            # for each shot in the shots group, check for collisions with the asteroid
+            for shot in shots:
+                # if a collision is detected, split the asteroid and remove the shot
+                if asteroid.collide(shot):
+                    asteroid.split()
+                    shot.kill()
 
         # refresh the screen
         pygame.display.flip()
