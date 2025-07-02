@@ -1,6 +1,8 @@
 import pygame
 from constants import *
 from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 def main():
     # initialize pygame
@@ -15,14 +17,26 @@ def main():
     # delta time for frame rate control
     dt = 0
 
-    # create sprite groups for updatable and drawable objects
+    """
+    create sprite groups for managing game objects
+
+    1. updatable group contains objects that need to be updated each frame
+    2. drawable group contains objects that need to be drawn each frame
+    3. asteroids group contains all asteroid objects
+
+    these groups will be used to manage the game objects efficiently and allow for easy updates and rendering
+    """
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
 
-    # add the player to the updatable and drawable groups
+    # set the containers for each class to the appropriate sprite groups
     Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable)
 
-    # create a player object spawned at the center of the screen
+    # create instances of the asteroid field and player objects
+    asteroid_field = AsteroidField()
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     # main game loop
