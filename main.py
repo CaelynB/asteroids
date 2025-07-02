@@ -1,4 +1,5 @@
 import pygame
+import sys
 from constants import *
 from player import Player
 from asteroid import Asteroid
@@ -55,6 +56,13 @@ def main():
         # render the drawable objects on the screen each frame
         for object in drawable:
             object.draw(screen)
+
+        # for each asteroid in the asteroids group, check for collisions with the player
+        for asteroid in asteroids:
+            # if a collision is detected, print "Game Over!" and exit the game
+            if asteroid.collide(player):
+                print("Game Over!")
+                sys.exit()
 
         # refresh the screen
         pygame.display.flip()
