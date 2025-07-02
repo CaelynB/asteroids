@@ -15,6 +15,13 @@ def main():
     # delta time for frame rate control
     dt = 0
 
+    # create sprite groups for updatable and drawable objects
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    # add the player to the updatable and drawable groups
+    Player.containers = (updatable, drawable)
+
     # create a player object spawned at the center of the screen
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
@@ -24,12 +31,16 @@ def main():
             # if the user clicks the close button, exit the game
             if event.type == pygame.QUIT:
                 return
-            
+
+        # update all updatable objects for each frame
+        updatable.update(dt)
+
         # fill the screen with black color
         screen.fill("black")
 
-        # re-render the player on the screen each frame
-        player.draw(screen)
+        # render the drawable objects on the screen each frame
+        for object in drawable:
+            object.draw(screen)
 
         # refresh the screen
         pygame.display.flip()
