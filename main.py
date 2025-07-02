@@ -4,6 +4,7 @@ from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
 
 def main():
     # initialize pygame
@@ -24,17 +25,20 @@ def main():
     1. updatable group contains objects that need to be updated each frame
     2. drawable group contains objects that need to be drawn each frame
     3. asteroids group contains all asteroid objects
+    4. shots group contains all shot objects
 
     these groups will be used to manage the game objects efficiently and allow for easy updates and rendering
     """
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
 
     # set the containers for each class to the appropriate sprite groups
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
+    Shot.containers = (shots, updatable, drawable)
 
     # create instances of the asteroid field and player objects
     asteroid_field = AsteroidField()
