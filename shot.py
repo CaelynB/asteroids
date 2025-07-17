@@ -8,10 +8,10 @@ class Shot(CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, SHOT_RADIUS)
 
-    # function to draw the bullet as a circle
+    # method to draw the bullet as a circle
     def draw(self, screen):
         pygame.draw.circle(screen, "white", (int(self.position.x), int(self.position.y)), self.radius, width=2)
 
-    # function to update the bullet position based on its velocity and delta time
+    # method to update the bullet position based on its velocity and delta time
     def update(self, dt):
         self.position += self.velocity * dt

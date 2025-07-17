@@ -34,13 +34,14 @@ class AsteroidField(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.spawn_timer = 0.0
 
-    # function to spawn an asteroid at a given position with a specified radius and velocity
+    # method to spawn an asteroid at a given position with a specified radius and velocity
     def spawn(self, radius, position, velocity):
         asteroid = Asteroid(position.x, position.y, radius)
         asteroid.velocity = velocity
 
-    # function to update the asteroid field, spawning new asteroids at regular intervals
+    # method to update the asteroid field, spawning new asteroids at regular intervals
     def update(self, dt):
+        # increment the spawn timer by the delta time
         self.spawn_timer += dt
 
         # if the spawn timer exceeds the asteroid spawn rate, reset it and spawn a new asteroid

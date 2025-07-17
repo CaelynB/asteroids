@@ -9,16 +9,17 @@ class Asteroid(CircleShape):
     def __init__(self, x, y, radius):
         super().__init__(x, y, radius)
 
-    # function to draw the asteroid as a circle
+    # method to draw the asteroid as a circle
     def draw(self, screen):
         pygame.draw.circle(screen, "white", (int(self.position.x), int(self.position.y)), self.radius, width=2)
 
-    # function to update the asteroid position based on its velocity and delta time
+    # method to update the asteroid position based on its velocity and delta time
     def update(self, dt):
         self.position += self.velocity * dt
 
-    # function to split the asteroid into smaller pieces
+    # method to split the asteroid into smaller pieces
     def split(self):
+        # remove the asteroid from the game
         self.kill()
 
         # if the asteroid is too small, do not split it
